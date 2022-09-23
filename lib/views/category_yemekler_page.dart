@@ -3,7 +3,7 @@ import 'package:bitirme_uygulamasi/cubit/homepage_cubit.dart';
 import 'package:bitirme_uygulamasi/models/category.dart';
 import 'package:bitirme_uygulamasi/models/yemekler.dart';
 import 'package:bitirme_uygulamasi/views/detail_yemek_page.dart';
-import 'package:bitirme_uygulamasi/views/my_color.dart';
+import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

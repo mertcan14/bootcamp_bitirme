@@ -2,7 +2,7 @@ import 'package:bitirme_uygulamasi/components/bottom_navigation_bar_custom.dart'
 import 'package:bitirme_uygulamasi/cubit/cart_cubit.dart';
 import 'package:bitirme_uygulamasi/models/sepet_yemekler.dart';
 import 'package:flutter/material.dart';
-import 'package:bitirme_uygulamasi/views/my_color.dart';
+import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -49,7 +49,8 @@ class _CartPageState extends State<CartPage> {
       backgroundColor: Color(0xff9ae19d),
       bottomNavigationBar: BottomNavigationBarCustom(secili_sayfa: 1,),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        backgroundColor: textFieldColor,
         elevation: 0,
         title: const Text("Sepetim", style: TextStyle(color: Colors.black, fontSize: 24),),
         iconTheme: IconThemeData(
@@ -73,7 +74,7 @@ class _CartPageState extends State<CartPage> {
                 Container(
                   height: height*6.5/10,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: textFieldColor,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(25)
@@ -173,14 +174,14 @@ class _CartPageState extends State<CartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Toplam Tutar: ", style: TextStyle(fontSize: 20),),
-                            Text("${totalPrice}£", style: TextStyle(fontSize: 20))
+                            Text("${totalPrice}₺", style: TextStyle(fontSize: 20))
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Toplam İndirim: ", style: TextStyle(fontSize: 20),),
-                            Text("0£", style: TextStyle(fontSize: 20))
+                            Text("0₺", style: TextStyle(fontSize: 20))
                           ],
                         ),
                         Divider(thickness: 1.0),
@@ -188,7 +189,7 @@ class _CartPageState extends State<CartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Toplam Ödenecek Tutar: ", style: TextStyle(fontSize: 22),),
-                            Text("${totalPrice}£", style: TextStyle(fontSize: 22))
+                            Text("${totalPrice}₺", style: TextStyle(fontSize: 22))
                           ],
                         ),
                       ],

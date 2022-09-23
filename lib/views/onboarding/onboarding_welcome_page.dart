@@ -1,4 +1,4 @@
-import 'package:bitirme_uygulamasi/views/my_color.dart';
+import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:bitirme_uygulamasi/views/onboarding/onboarding_content_page.dart';
 import 'package:flutter/material.dart';
 

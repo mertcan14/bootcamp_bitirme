@@ -1,6 +1,6 @@
 import 'package:bitirme_uygulamasi/cubit/detailyemek_cubit.dart';
 import 'package:bitirme_uygulamasi/models/yemekler.dart';
-import 'package:bitirme_uygulamasi/views/my_color.dart';
+import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_elegant_number_button/flutter_elegant_number_button.dart';
@@ -29,57 +29,72 @@ class _DetailYemekPageState extends State<DetailYemekPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var height= size.height;
+    var width = size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${widget.yemekler.yemek_resim_adi}"),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text(widget.yemekler.yemek_adi, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
-              ),
-              Text("${widget.yemekler.yemek_fiyat}₺", style: TextStyle(fontSize: 24),),
-            ],
-          ),
-          Column(
-            children: [
-              ElegantNumberButton(
-                initialValue: _defaultValue,
-                color: mainColor,
-                buttonSizeWidth: 50,
-                buttonSizeHeight: 30,
-                textStyle: TextStyle(fontSize: 24),
-                minValue: 1,
-                maxValue: 20,
-                step: 1,
-                decimalPlaces: 0,
-                onChanged: (value) { // get the latest value from here
-                  setState(() {
-                    _defaultValue = value;
-                  });
-                },
-              ),
-              Padding(
-                padding:const EdgeInsets.only(top: 10.0),
-                child: Text("Toplam Ücret: ${widget.yemekler.yemek_fiyat * _defaultValue}₺", style: TextStyle(fontSize: 16),),
-              )
-            ],
-          ),
-          ElevatedButton.icon(
-            onPressed: (){
-              addCart(widget.yemekler, _defaultValue.toInt());
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: mainColor,
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0)
+      backgroundColor: textFieldColor,
+      appBar: AppBar(
+        backgroundColor: textFieldColor,
+        elevation: 0,
+        title: const Text("Yemek", style: TextStyle(color: Colors.black, fontSize: 24),),
+        iconTheme: IconThemeData(
+            color: Colors.black
+        ),
+      ),
+      body: SizedBox(
+        width: width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${widget.yemekler.yemek_resim_adi}"),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(widget.yemekler.yemek_adi, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
+                ),
+                Text("${widget.yemekler.yemek_fiyat}₺", style: TextStyle(fontSize: 24),),
+              ],
             ),
-            icon: Icon(Icons.add_shopping_cart),
-            label: Text("Sepete Ekle", style: TextStyle(fontSize: 18),),
-          )
-        ],
+            Column(
+              children: [
+                ElegantNumberButton(
+                  initialValue: _defaultValue,
+                  color: mainColor,
+                  buttonSizeWidth: 50,
+                  buttonSizeHeight: 30,
+                  textStyle: TextStyle(fontSize: 24),
+                  minValue: 1,
+                  maxValue: 20,
+                  step: 1,
+                  decimalPlaces: 0,
+                  onChanged: (value) { // get the latest value from here
+                    setState(() {
+                      _defaultValue = value;
+                    });
+                  },
+                ),
+                Padding(
+                  padding:const EdgeInsets.only(top: 10.0),
+                  child: Text("Toplam Ücret: ${widget.yemekler.yemek_fiyat * _defaultValue}₺", style: TextStyle(fontSize: 16),),
+                )
+              ],
+            ),
+            ElevatedButton.icon(
+              onPressed: (){
+                addCart(widget.yemekler, _defaultValue.toInt());
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: mainColor,
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0)
+              ),
+              icon: Icon(Icons.add_shopping_cart),
+              label: Text("Sepete Ekle", style: TextStyle(fontSize: 18),),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,8 +1,10 @@
+import 'package:bitirme_uygulamasi/cubit/address_cubit.dart';
 import 'package:bitirme_uygulamasi/cubit/cart_cubit.dart';
 import 'package:bitirme_uygulamasi/cubit/category_cubit.dart';
 import 'package:bitirme_uygulamasi/cubit/categoryyemekler_cubit.dart';
 import 'package:bitirme_uygulamasi/cubit/detailyemek_cubit.dart';
 import 'package:bitirme_uygulamasi/cubit/homepage_cubit.dart';
+import 'package:bitirme_uygulamasi/cubit/order_cubit.dart';
 import 'package:bitirme_uygulamasi/my_router.dart';
 import 'package:bitirme_uygulamasi/views/homepage.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DetailYemekCubit()),
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => CategoryYemeklerCubit()),
+        BlocProvider(create: (context) => AddressCubit()),
+        BlocProvider(create: (context) => OrderCubit()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -1,6 +1,7 @@
 import 'package:bitirme_uygulamasi/views/cart_page.dart';
 import 'package:bitirme_uygulamasi/views/homepage.dart';
-import 'package:bitirme_uygulamasi/views/my_color.dart';
+import 'package:bitirme_uygulamasi/my_color.dart';
+import 'package:bitirme_uygulamasi/views/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationBarCustom extends StatefulWidget {
@@ -28,7 +29,7 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
     _children = [
       Homepage(),
       CartPage(),
-      Homepage(),
+      ProfilePage(),
     ];
     super.initState();
   }
@@ -71,7 +72,7 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
-            label: "Hesap"
+            label: "Profil"
             /*title: new Text("Bul", style: TextStyle( color: secili_sayfa == 2 ? Colors.white: Colors.white54)),*/
           ),
         ],

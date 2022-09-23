@@ -1,6 +1,6 @@
 import 'package:bitirme_uygulamasi/views/homepage.dart';
 import 'package:bitirme_uygulamasi/views/login.dart';
-import 'package:bitirme_uygulamasi/views/my_color.dart';
+import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:bitirme_uygulamasi/views/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

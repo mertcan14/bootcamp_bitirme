@@ -3,8 +3,7 @@ import 'package:bitirme_uygulamasi/cubit/category_cubit.dart';
 import 'package:bitirme_uygulamasi/cubit/homepage_cubit.dart';
 import 'package:bitirme_uygulamasi/models/yemekler.dart';
 import 'package:bitirme_uygulamasi/views/category_page.dart';
-import 'package:bitirme_uygulamasi/views/detail_yemek_page.dart';
-import 'package:bitirme_uygulamasi/views/my_color.dart';
+import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,15 +69,6 @@ class _HomepageState extends State<Homepage> {
     } catch (e) {
       print("hata");
     }
-  }
-
-  void detailYemek(Yemekler yemekler){
-    showDialog(
-      context: context,
-      builder: (ctx)=>AlertDialog(
-        content: DetailYemekPage(yemekler: yemekler),
-      )
-    );
   }
 
   @override
@@ -214,7 +204,7 @@ class _HomepageState extends State<Homepage> {
                           var yemek = yemeklerList[index];
                           return GestureDetector(
                             onTap: (){
-                              detailYemek(yemek);
+                              Navigator.pushNamed(context, '/food', arguments: yemek);
                             },
                             child: Card(
                               shape: RoundedRectangleBorder(
