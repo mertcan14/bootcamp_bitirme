@@ -1,12 +1,16 @@
 import 'package:bitirme_uygulamasi/components/myappbar.dart';
+import 'package:bitirme_uygulamasi/models/address.dart';
 import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubit/address_cubit.dart';
 
 class AddAddressPage extends StatefulWidget {
   String token;
-  String address_length;
+  List<AddressUser> addressList;
 
-  AddAddressPage({required this.token, required this.address_length});
+  AddAddressPage({required this.token, required this.addressList});
 
   @override
   _AddAddressPageState createState() => _AddAddressPageState();
@@ -22,6 +26,13 @@ class _AddAddressPageState extends State<AddAddressPage> {
   void initState() {
     super.initState();
   }
+
+  bool addAddress(){
+    widget.addressList.add(AddressUser(AddressId: (int.parse(widget.addressList.last.AddressId)+1).toString(), Address: addressController.text,
+        AddressTitle: addressTitleController.text, City: cityController.text, District: districtController.text));
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -112,8 +123,10 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   width: width,
                   height: height*8/100,
                   child: ElevatedButton.icon(
-                    onPressed: (){
-
+                    onPressed: () async{
+                      await addAddress();
+                      await context.read<AddressCubit>().addAddress(widget.token, widget.addressList);
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: mainColor,

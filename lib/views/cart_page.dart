@@ -17,7 +17,6 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   var totalPrice = 0;
-  SlidableController? _slidableController;
 
   @override
   void initState() {
@@ -45,14 +44,15 @@ class _CartPageState extends State<CartPage> {
     var size = MediaQuery.of(context).size;
     var height= size.height;
     var width = size.width;
+    var padding = MediaQuery.of(context).padding;
     return Scaffold(
-      backgroundColor: Color(0xff9ae19d),
+      backgroundColor: textFieldColor,
       bottomNavigationBar: BottomNavigationBarCustom(secili_sayfa: 1,),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: textFieldColor,
         elevation: 0,
-        title: const Text("Sepetim", style: TextStyle(color: Colors.black, fontSize: 24),),
+        title: const Text("Sepetim", style: TextStyle(color: Colors.black, fontSize: 28, fontFamily: "RobotoMono"),),
         iconTheme: IconThemeData(
           color: Colors.black
         ),
@@ -65,161 +65,171 @@ class _CartPageState extends State<CartPage> {
           )
         ],
       ),
-      body: BlocBuilder<CartCubit, List<SepetYemekler>>(
-        builder: (context, sepetYemekler){
-          if(sepetYemekler.isNotEmpty){
-            calcuTotalPrice(sepetYemekler);
-            return Column(
-              children: [
-                Container(
-                  height: height*6.5/10,
-                  decoration: BoxDecoration(
-                    color: textFieldColor,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(25),
-                      bottomRight: Radius.circular(25)
-                    )
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric( horizontal: width*3/100),
-                    child: ListView.builder(
-                      itemCount: sepetYemekler.length,
-                      itemBuilder: (context, index){
-                        var yemek = sepetYemekler[index];
-                        return Slidable(
-                          endActionPane: ActionPane(
-                            extentRatio: 0.2,
-                            motion: ScrollMotion(),
+      body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: SizedBox(
+          height: height - kToolbarHeight - kBottomNavigationBarHeight - padding.bottom - padding.top - (height*2/100),
+          child: BlocBuilder<CartCubit, List<SepetYemekler>>(
+            builder: (context, sepetYemekler){
+              if(sepetYemekler.isNotEmpty){
+                calcuTotalPrice(sepetYemekler);
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: height*6.5/10,
+                      child: ListView.builder(
+                        itemCount: sepetYemekler.length,
+                        itemBuilder: (context, index){
+                          var yemek = sepetYemekler[index];
+                          return Padding(
+                            padding: EdgeInsets.symmetric( horizontal: width*3/100),
+                            child: Slidable(
+                              endActionPane: ActionPane(
+                                extentRatio: 0.2,
+                                motion: ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                    onPressed: (BuildContext context){
+                                      context.read<CartCubit>().cartDeleteByEmailYemekname(yemek.yemek_adi);
+                                    },
+                                    backgroundColor: Colors.red,
+                                    foregroundColor: Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                    icon: Icons.delete,
+                                    label: 'Sil',
+                                  ),
+                                ],
+                              ),
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Container(
+                                              width: width*2/10,
+                                              height: height*1/10,
+                                              decoration: BoxDecoration(
+                                                  color: textFieldColor,
+                                                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+                                              ),
+                                              child: Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: height*1.2/10,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(yemek.yemek_adi, style: TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.w500),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    FaIcon(FontAwesomeIcons.motorcycle, color: mainColor),
+                                                    Text("  ${yemek.yemek_fiyat * yemek.yemek_siparis_adet}₺", style: TextStyle(
+                                                      fontSize: 20,
+                                                    ),),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(right: width*2/100),
+                                        child: Text("${yemek.yemek_siparis_adet}", style: TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.bold,
+                                          color: mainColor  ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            topRight: Radius.circular(25)
+                          )
+                      ),
+                      child:Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              SlidableAction(
-                                onPressed: (BuildContext context){
-                                  context.read<CartCubit>().cartDeleteByEmailYemekname(yemek.yemek_adi);
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Toplam: ", style: TextStyle(fontSize: 18),),
+                                  Text("${totalPrice}₺", style: TextStyle(fontSize: 22)),
+                                ],
+                              ),
+                              ElevatedButton.icon(
+                                onPressed: (){
+                                  Navigator.pushNamed(context, "/cart/payment", arguments: [sepetYemekler, totalPrice]);
                                 },
-                                backgroundColor: Colors.red,
-                                foregroundColor: Colors.white,
-                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                icon: Icons.delete,
-                                label: 'Sil',
+                                icon: Icon(Icons.delivery_dining, size: 28,),
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(vertical: height*2/100, horizontal: width*3/100),
+                                  backgroundColor: mainColor,
+                                  shape: StadiumBorder()
+                                ),
+                                label: Text("Sepeti Onayla", style: TextStyle(fontSize: 18),),
                               ),
                             ],
                           ),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: SizedBox(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Container(
-                                          width: width*2/10,
-                                          height: height*1/10,
-                                          decoration: BoxDecoration(
-                                              color: textFieldColor,
-                                              borderRadius: BorderRadius.all(Radius.circular(20.0))
-                                          ),
-                                          child: Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height*1.2/10,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(yemek.yemek_adi, style: TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.w500),
-                                            ),
-                                            Row(
-                                              children: [
-                                                FaIcon(FontAwesomeIcons.motorcycle, color: mainColor),
-                                                Text("  ${yemek.yemek_fiyat * yemek.yemek_siparis_adet}₺", style: TextStyle(
-                                                  fontSize: 20,
-                                                ),),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: width*2/100),
-                                    child: Text("${yemek.yemek_siparis_adet}", style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold,
-                                      color: mainColor  ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                          Divider(
+                            color: mainColor,
+                            thickness: 0.7,
+                          )
+                        ],
+                      ),
                     ),
+                  ],
+                );
+              }else{
+                return Container(
+                  width: width,
+                  height: height,
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset("images/empty.png"),
+                      Padding(
+                        padding: EdgeInsets.only(top: height/10),
+                        child: Text("Sepetiniz Boş", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+                      ),
+                      Text("Sepetinizde ürün bulunamamıştır", style: TextStyle(
+                          color: helperTextColor,
+                          fontSize: 18
+                      ),),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric( horizontal: width*3/100),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Toplam Tutar: ", style: TextStyle(fontSize: 20),),
-                            Text("${totalPrice}₺", style: TextStyle(fontSize: 20))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Toplam İndirim: ", style: TextStyle(fontSize: 20),),
-                            Text("0₺", style: TextStyle(fontSize: 20))
-                          ],
-                        ),
-                        Divider(thickness: 1.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Toplam Ödenecek Tutar: ", style: TextStyle(fontSize: 22),),
-                            Text("${totalPrice}₺", style: TextStyle(fontSize: 22))
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            );
-          }else{
-            return Container(
-              width: width,
-              height: height,
-              color: Colors.white,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("images/empty.png"),
-                  Padding(
-                    padding: EdgeInsets.only(top: height/10),
-                    child: Text("Sepetiniz Boş", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
-                  ),
-                  Text("Sepetinizde ürün bulunamamıştır", style: TextStyle(
-                      color: helperTextColor,
-                      fontSize: 18
-                  ),),
-                ],
-              ),
-            );
-          }
-        },
+                );
+              }
+            },
+          ),
+        ),
       ),
     );
   }

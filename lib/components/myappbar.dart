@@ -19,7 +19,7 @@ class _MyAppBarState extends State<MyAppBar> {
     return AppBar(
       backgroundColor: textFieldColor,
       elevation: 0,
-      title: Text(widget.title, style: TextStyle(color: Colors.black, fontSize: 24),),
+      title: Text(widget.title, style: TextStyle(color: Colors.black, fontSize: 24, fontFamily: "RobotoMono"),),
       iconTheme: IconThemeData(
           color: Colors.black
       ),

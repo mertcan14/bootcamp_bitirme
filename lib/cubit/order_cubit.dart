@@ -1,16 +1,18 @@
 import 'package:bitirme_uygulamasi/models/order.dart';
 import 'package:bitirme_uygulamasi/models/order_dto.dart';
-import 'package:bitirme_uygulamasi/models/order_food.dart';
 import 'package:bitirme_uygulamasi/models/order_food_dto.dart';
+import 'package:bitirme_uygulamasi/models/sepet_yemekler.dart';
 import 'package:bitirme_uygulamasi/repo/yemekler_dao_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class OrderCubit extends Cubit<List<OrderDto>>{
   OrderCubit():super(<OrderDto>[]);
 
   var refOrder = FirebaseFirestore.instance.collection("Order");
   var yRepo = YemeklerDaoRepository();
+  final date_format = new DateFormat('yyyy.MM.dd hh:mm');
 
   Future<void> getAllOrder(String token) async{
     List<Order> orderList = [];
@@ -35,5 +37,17 @@ class OrderCubit extends Cubit<List<OrderDto>>{
       });
     }
     emit(orderDtos);
+  }
+
+  Future<void> addOrder(String token, List<SepetYemekler> sepetList) async{
+    List itemList = [];
+    sepetList.forEach((sepet) {
+      itemList.add({
+        "FoodId":sepet.yemek_id.toString(),
+        "FoodTotal": sepet.yemek_siparis_adet.toString(),
+      });
+    });
+    await refOrder.doc().set({"Foods":FieldValue.arrayUnion(itemList), "AddedDate": date_format.format(DateTime.now()).toString(), "UserUUID": token});
+
   }
 }

@@ -32,7 +32,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset("images/pizzalogo.png", width: 100,),
-                    Text("YemekBurada", style: TextStyle(fontSize: 28),),
+                    Text("YemekBurada", style: TextStyle(fontSize: 32, fontFamily: "Lobster"),),
                   ],
                 ),
               ),

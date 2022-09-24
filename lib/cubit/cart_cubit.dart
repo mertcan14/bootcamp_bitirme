@@ -20,6 +20,7 @@ class CartCubit extends Cubit<List<SepetYemekler>>{
   Future<void> cartGetAllByEmail(String email) async{
     var seen = Set<String>();
     var list = await yRepo.getAllCart(email);
+    var list_yemekler = await yRepo.getAllYemekler();
     if(list.isNotEmpty){
       var distincitList = await list.where((element) => seen.add(element.yemek_adi)).toList();
       for (var d in distincitList) {
@@ -28,6 +29,7 @@ class CartCubit extends Cubit<List<SepetYemekler>>{
           list.where((element) => element.yemek_adi == d.yemek_adi).forEach((element) {count += element.yemek_siparis_adet;});
           d.yemek_siparis_adet = count;
         }
+        d.yemek_id =await list_yemekler.where((yemekler) => yemekler.yemek_adi == d.yemek_adi).first.yemek_id.toString();
       }
       emit(distincitList);
     }

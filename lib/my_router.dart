@@ -2,6 +2,7 @@ import 'package:bitirme_uygulamasi/models/yemekler.dart';
 import 'package:bitirme_uygulamasi/views/add_address_page.dart';
 import 'package:bitirme_uygulamasi/views/auth_page.dart';
 import 'package:bitirme_uygulamasi/views/cart_page.dart';
+import 'package:bitirme_uygulamasi/views/cart_payment_page.dart';
 import 'package:bitirme_uygulamasi/views/category_yemekler_page.dart';
 import 'package:bitirme_uygulamasi/views/detail_yemek_page.dart';
 import 'package:bitirme_uygulamasi/views/homepage.dart';
@@ -15,6 +16,8 @@ import 'package:bitirme_uygulamasi/views/register_page.dart';
 import 'package:bitirme_uygulamasi/models/category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'models/sepet_yemekler.dart';
 
 class MyRouter{
   static Route<dynamic> generateRoute(RouteSettings routeSettings){
@@ -41,6 +44,11 @@ class MyRouter{
           return MaterialPageRoute(builder: (_)=>CategoryYemeklerPage(category: args));
         }
         return MaterialPageRoute(builder: (_)=>Homepage());
+      case cartPaymentRoute:
+        if(args is List){
+          return MaterialPageRoute(builder: (_)=>CartPaymentPage(yemekler: args[0], total_price: args[1],));
+        }
+        return MaterialPageRoute(builder: (_)=>Homepage());
       case foodDetailRoute:
         if(args is Yemekler){
           return MaterialPageRoute(builder: (_)=>DetailYemekPage(yemekler: args));
@@ -53,7 +61,7 @@ class MyRouter{
         return MaterialPageRoute(builder: (_)=>Homepage());
       case addAddressRoute:
         if(args is List){
-          return MaterialPageRoute(builder: (_)=>AddAddressPage(token: args[0], address_length: args[1],));
+          return MaterialPageRoute(builder: (_)=>AddAddressPage(token: args[0], addressList: args[1],));
         }
         return MaterialPageRoute(builder: (_)=>Homepage());
       case ordersRoute:
@@ -77,6 +85,7 @@ class MyRouter{
 const String homeRoute = '/';
 const String foodDetailRoute = '/food';
 const String cartRoute = '/cart';
+const String cartPaymentRoute = '/cart/payment';
 const String categoryRoute = '/category';
 const String addressRoute = '/address';
 const String ordersRoute = '/orders';

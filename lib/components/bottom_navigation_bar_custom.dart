@@ -37,10 +37,10 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.only(
+      /*borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(20.0),
         topRight: Radius.circular(20.0)
-      ),
+      ),*/
       child: BottomNavigationBar(
         elevation: 16.0,
         backgroundColor: Colors.white,
@@ -49,12 +49,13 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
           secili_sayfa = await index;
           routesPage();
         },
-        selectedLabelStyle: TextStyle(fontSize: 18),
+        selectedLabelStyle: TextStyle(fontSize: 18, fontFamily: "Lobster"),
         selectedItemColor: mainColor,
         selectedIconTheme: IconThemeData(
           color: mainColor,
           size: 32
         ),
+        unselectedLabelStyle: TextStyle(fontFamily: "Lora"),
         unselectedItemColor: helperTextColor,
         unselectedIconTheme: IconThemeData(
           color: helperTextColor
@@ -63,17 +64,14 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
             label: "Ana Sayfa"
-            /*title: new Text("Anasayfa", style: TextStyle( color: secili_sayfa == 0 ? Colors.white: Colors.white54),),*/
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
             label: "Sepet"
-            /*title: new Text("İndirilenler", style: TextStyle( color: secili_sayfa == 1 ? Colors.white: Colors.white54)),*/
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             label: "Profil"
-            /*title: new Text("Bul", style: TextStyle( color: secili_sayfa == 2 ? Colors.white: Colors.white54)),*/
           ),
         ],
       ),

@@ -58,7 +58,7 @@ class _AuthPageState extends State<AuthPage> {
                         Expanded(
                             child: Divider(thickness: 1,)
                         ),
-                        Text("OR"),
+                        Text("VEYA"),
                         Expanded(
                             child: Divider(thickness: 1,)
                         ),

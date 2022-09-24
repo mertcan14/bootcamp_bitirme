@@ -106,7 +106,7 @@ class _HomepageState extends State<Homepage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Bugün Canınız Ne Çekiyor ?", style: TextStyle(color: helperTextColor),),
+                            Text("Bugün Canınız Ne Çekiyor ?", style: TextStyle(color: helperTextColor, fontFamily: "Lora"),),
                             Text(email == null ? "" : email, style: TextStyle(color: Colors.black),)
                           ],
                         ),
@@ -156,6 +156,10 @@ class _HomepageState extends State<Homepage> {
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search, color: mainColor,),
                     hintText: "Ne Arıyorsunuz ?",
+                    hintStyle: TextStyle(
+                      fontFamily: "Lobster",
+                      fontSize: 18
+                    ),
                     filled: true,
                     fillColor: textFieldColor,
                     border: OutlineInputBorder(
@@ -174,8 +178,9 @@ class _HomepageState extends State<Homepage> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: const Text("Kategoriler", style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                    fontSize: 22,
+                    fontFamily: "Lora",
+                    fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -187,8 +192,9 @@ class _HomepageState extends State<Homepage> {
                 padding: EdgeInsets.only(top: height/100),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child:const Text("Yemekler :D", style: TextStyle(
+                  child:const Text("Yemekler", style: TextStyle(
                       fontSize: 22,
+                      fontFamily: "Lora",
                       fontWeight: FontWeight.bold),
                   ),
                 ),

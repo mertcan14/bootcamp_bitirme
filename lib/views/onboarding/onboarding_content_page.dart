@@ -38,7 +38,6 @@ class _OnboardingContentPageState extends State<OnboardingContentPage> {
         children: [
           SizedBox(
             width: width*8.5/10,
-            height: height*7/10,
             child: CarouselSlider.builder(
               itemCount: listCarousel.length,
               itemBuilder: (context,index, sayi){
@@ -122,7 +121,7 @@ class MyImageView extends StatelessWidget{
         ),
         Text(
           content.title,
-          style: TextStyle(fontSize: 28, color: mainColor, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 28, color: mainColor, fontWeight: FontWeight.bold, fontFamily: "Lora"),
           textAlign: TextAlign.center,
         ),
         Text(

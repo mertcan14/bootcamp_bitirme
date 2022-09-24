@@ -1,3 +1,4 @@
+import 'package:bitirme_uygulamasi/components/myappbar.dart';
 import 'package:bitirme_uygulamasi/cubit/categoryyemekler_cubit.dart';
 import 'package:bitirme_uygulamasi/cubit/homepage_cubit.dart';
 import 'package:bitirme_uygulamasi/models/category.dart';
@@ -180,15 +181,6 @@ class _CategoryYemeklerPageState extends State<CategoryYemeklerPage> {
       },
     );
   }
-
-  void detailYemek(Yemekler yemekler){
-    showDialog(
-        context: context,
-        builder: (ctx)=>AlertDialog(
-          content: DetailYemekPage(yemekler: yemekler),
-        )
-    );
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -197,14 +189,7 @@ class _CategoryYemeklerPageState extends State<CategoryYemeklerPage> {
     var width = size.width;
     return Scaffold(
       backgroundColor: textFieldColor,
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(widget.category.CategoryName, style: TextStyle(color: Colors.black),),
-        backgroundColor: textFieldColor,
-        iconTheme: IconThemeData(
-            color: Colors.black
-        ),
-      ),
+      appBar: MyAppBar(title: widget.category.CategoryName,),
       body: Column(
         children: [
           Row(
@@ -257,9 +242,7 @@ class _CategoryYemeklerPageState extends State<CategoryYemeklerPage> {
                       var yemek = yemeklerList[index];
                       return GestureDetector(
                         onTap: (){
-                          setState(() {
-                            detailYemek(yemek);
-                          });
+                          Navigator.pushNamed(context, '/food', arguments: yemek);
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(

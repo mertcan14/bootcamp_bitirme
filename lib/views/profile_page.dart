@@ -1,4 +1,3 @@
-import 'package:bitirme_uygulamasi/components/myappbar.dart';
 import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,7 +48,6 @@ class _ProfilePageState extends State<ProfilePage> {
     var size = MediaQuery.of(context).size;
     var height= size.height;
     var width = size.width;
-    var padding = MediaQuery.of(context).padding;
     return Scaffold(
       backgroundColor: textFieldColor,
       bottomNavigationBar: BottomNavigationBarCustom(secili_sayfa: 2,),

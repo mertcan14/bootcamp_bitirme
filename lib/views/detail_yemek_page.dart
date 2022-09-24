@@ -1,3 +1,4 @@
+import 'package:bitirme_uygulamasi/components/myappbar.dart';
 import 'package:bitirme_uygulamasi/cubit/detailyemek_cubit.dart';
 import 'package:bitirme_uygulamasi/models/yemekler.dart';
 import 'package:bitirme_uygulamasi/my_color.dart';
@@ -34,14 +35,7 @@ class _DetailYemekPageState extends State<DetailYemekPage> {
     var width = size.width;
     return Scaffold(
       backgroundColor: textFieldColor,
-      appBar: AppBar(
-        backgroundColor: textFieldColor,
-        elevation: 0,
-        title: const Text("Yemek", style: TextStyle(color: Colors.black, fontSize: 24),),
-        iconTheme: IconThemeData(
-            color: Colors.black
-        ),
-      ),
+      appBar: MyAppBar(title: "Yemek",),
       body: SizedBox(
         width: width,
         child: Column(

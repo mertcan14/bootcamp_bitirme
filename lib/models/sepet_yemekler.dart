@@ -5,6 +5,7 @@ class SepetYemekler{
   int yemek_fiyat;
   int yemek_siparis_adet;
   String kullanici_adi;
+  String? yemek_id;
 
   SepetYemekler({required this.sepet_yemek_id, required this.yemek_adi, required this.yemek_siparis_adet,
   required this.yemek_resim_adi, required this.yemek_fiyat, required this.kullanici_adi});

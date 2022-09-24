@@ -42,6 +42,7 @@ dependencies:
   carousel_slider: ^4.1.0
   flutter_elegant_number_button: ^0.0.6
   flutter_slidable: ^1.3.2
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -86,10 +87,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Lobster
+      fonts:
+        - asset: fonts/Lobster-Regular.ttf
+    - family: Lora
+      fonts:
+        - asset: fonts/Lora-MediumItalic.ttf
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/RobotoMono-Medium.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

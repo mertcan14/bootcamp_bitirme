@@ -4,7 +4,6 @@ import 'package:bitirme_uygulamasi/models/order_dto.dart';
 import 'package:bitirme_uygulamasi/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class OrderPage extends StatefulWidget {
   String token;
@@ -28,7 +27,6 @@ class _OrderPageState extends State<OrderPage> {
     var size = MediaQuery.of(context).size;
     var height= size.height;
     var width = size.width;
-    var padding = MediaQuery.of(context).padding;
     return Scaffold(
       appBar: MyAppBar(title: "Siparişlerim"),
       body: BlocBuilder<OrderCubit, List<OrderDto>>(

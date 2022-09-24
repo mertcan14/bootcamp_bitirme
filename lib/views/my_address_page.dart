@@ -16,7 +16,7 @@ class MyAddressPage extends StatefulWidget {
 }
 
 class _MyAddressPageState extends State<MyAddressPage> {
-  var addressLength;
+  List<AddressUser> addresses = [];
   @override
   void initState() {
     super.initState();
@@ -36,7 +36,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
         child: BlocBuilder<AddressCubit, List<AddressUser>>(
           builder: (context, addressList){
             if(addressList.isNotEmpty){
-              addressLength = addressList.length;
+              addresses = addressList;
               return ListView.builder(
                 itemCount: addressList.length,
                 itemBuilder: (context, index){
@@ -47,7 +47,9 @@ class _MyAddressPageState extends State<MyAddressPage> {
                       motion: ScrollMotion(),
                       children: [
                         SlidableAction(
-                          onPressed: (BuildContext context){
+                          onPressed: (BuildContext context) async{
+                            addresses.removeWhere((element) => element.AddressId == address.AddressId);
+                            await context.read<AddressCubit>().addAddress(widget.Token, addresses);
                           },
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
@@ -85,7 +87,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamed(context, "/address/add", arguments: [widget.Token, addressLength.toString()]).then((value) => context.read<AddressCubit>().getAllAddress(widget.Token));
+          Navigator.pushNamed(context, "/address/add", arguments: [widget.Token, addresses ]).then((value) => context.read<AddressCubit>().getAllAddress(widget.Token));
         },
         child: Icon(Icons.add),
         backgroundColor: mainColor,

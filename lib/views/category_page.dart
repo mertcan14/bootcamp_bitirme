@@ -39,7 +39,7 @@ class _CategoryPageState extends State<CategoryPage> {
                         padding: EdgeInsets.symmetric(horizontal: width/100),
                         child: Image.asset(category.ImagePath, width: width/4, height: height*8/100, fit:BoxFit.contain)
                     ),
-                    Text(category.CategoryName, style: TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, fontSize: 16 ),)
+                    Text(category.CategoryName, style: TextStyle(fontFamily: "Lora", fontWeight: FontWeight.w600, fontSize: 16 ),)
                   ],
                 ),
               );
