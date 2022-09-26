@@ -38,6 +38,8 @@ Techcareer.net Flutter Bootcamp Bitirme Projesi olarak yaptığım projem, yemek
 
 -Kategori sayfasında filtreleme ve sıralama
 
+-Uygulamayı ilk indirdiğimizde karşılama ekranı
+
 ## Proje Video Linki
 
 https://youtu.be/xLMFKLsULHw
