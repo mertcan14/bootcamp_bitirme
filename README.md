@@ -38,5 +38,9 @@ Techcareer.net Flutter Bootcamp Bitirme Projesi olarak yaptığım projem, yemek
 
 -Kategori sayfasında filtreleme ve sıralama
 
+## Proje Video Linki
+
+https://youtu.be/xLMFKLsULHw
+
 
 
