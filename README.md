@@ -1,16 +1,42 @@
-# bitirme_uygulamasi
+# Food Project Flutter Bootcamp
 
-A new Flutter project.
+Techcareer.net Flutter Bootcamp Bitirme Projesi olarak yaptığım projem, yemek sipariş uygulamasıdır. Yapılar;
 
-## Getting Started
+-Bloc Pattern
 
-This project is a starting point for a Flutter application.
+-Firebase Authentication
 
-A few resources to get you started if this is your first Flutter project:
+-Google Sign In
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+-Dio
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-Firebase Firestore
+
+-OnGenerateRoute 
+
+-Shared Preferences
+
+## Uygulama Özellikleri
+
+-Başlangıç ekranında yemeklerin listelenmesi
+
+-Yemekleri isme göre arama
+
+-Yemekleri detay sayfasında gösterme
+
+-Kayıt, giriş ve Google hesabı ile giriş
+
+-Sepetteki yemeklerin gösterilmesi
+
+-Sepetteki yemeklerin tek tek silinmesi ve toplu silinmesi
+
+-Adres ekleme ve silme
+
+-Yemeği sipariş verme ve önceden verilen siparişlerin listelenmesi
+
+-Yemekleri kategoriye göre getirme
+
+-Kategori sayfasında filtreleme ve sıralama
+
+
+
